@@ -85,7 +85,7 @@ public class Robot extends IterativeRobot {
 		leftmotor.setSpeed(0.5);
 		
 		double leftspeed =  controller.getY(Hand.kLeft);
-		double rightspeed = controller.gety(Hand.kRight);
+		double rightspeed = controller.getY(Hand.kRight);
 		
 		
 		
