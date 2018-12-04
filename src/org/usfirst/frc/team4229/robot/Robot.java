@@ -7,7 +7,10 @@
 
 package org.usfirst.frc.team4229.robot;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -24,6 +27,9 @@ public class Robot extends IterativeRobot {
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 
+	Spark leftmotor = new Spark(0);
+	Spark rightmotor=new Spark(1);
+	XboxController controller=new XboxController(2);
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -75,8 +81,19 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		rightmotor.setSpeed(0.5);
+		leftmotor.setSpeed(0.5);
+		
+		double leftspeed =  controller.getY(Hand.kLeft);
+		double rightspeed = controller.gety(Hand.kRight);
+		
+		
+		
 	}
 
+	
+	
+	
 	/**
 	 * This function is called periodically during test mode.
 	 */
