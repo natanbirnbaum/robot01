@@ -7,10 +7,14 @@
 
 package org.usfirst.frc.team4229.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -27,9 +31,12 @@ public class Robot extends IterativeRobot {
 	private String m_autoSelected;
 	private SendableChooser<String> m_chooser = new SendableChooser<>();
 
-	Spark leftmotor = new Spark(0);
-	Spark rightmotor=new Spark(1);
+	WPI_TalonSRX leftmotor = new WPI_TalonSRX(0);
+	WPI_TalonSRX rightmotor=new WPI_TalonSRX(1);
 	XboxController controller=new XboxController(2);
+	
+	DifferentialDrive driver = new DifferentialDrive(leftmotor, rightmotor);
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -72,7 +79,7 @@ public class Robot extends IterativeRobot {
 			case kDefaultAuto:
 			default:
 				// Put default auto code here
-				break;
+				break;   
 		}
 	}
 
@@ -81,13 +88,11 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		rightmotor.setSpeed(0.5);
-		leftmotor.setSpeed(0.5);
 		
 		double leftspeed =  controller.getY(Hand.kLeft);
 		double rightspeed = controller.getY(Hand.kRight);
 		
-		
+		driver.tankDrive(leftspeed, rightspeed);
 		
 	}
 
